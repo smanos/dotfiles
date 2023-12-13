@@ -1,0 +1,23 @@
+PS1="%{%F{033}%}%n%{%f%}@%{%F{green}%}%m:%{%F{yellow}%}%~%{$%f%}%  "
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+alias vim="nvim"
+alias pa="php artisan"
+
+alias pine="alpine"
+
+
+path+=($HOME/.local/bin $path)
+path+=/Users/smanos/Documents/Applications/nvim-macos/bin
+
+
+
+# Herd injected PHP binary.
+export PATH="/Users/smanos/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/82/"
