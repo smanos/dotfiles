@@ -67,11 +67,27 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
-
-  -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  'tpope/vim-surround',
+  'tpope/vim-repeat',
+  -- 'sheerun/vim-polyglot',
+  'farmergreg/vim-lastplace',
+  'nelstrom/vim-visual-star-search',
+
+    -- Automatically add closing brackets, quotes, etc.
+  { 'windwp/nvim-autopairs', config = true },
+
+  -- Add smooth scrolling to avoid jarring jumps
+  { 'karb94/neoscroll.nvim', config = true },
+
+  -- Automatically fix indentation when pasting code.
+  {
+    'sickill/vim-pasta',
+    config = function()
+      vim.g.pasta_disabled_filetypes = { 'fugitive' }
+    end,
+  },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -119,73 +135,74 @@ require('lazy').setup({
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-      on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
+      -- signs = {
+      --   add = { text = '+' },
+      --   change = { text = '~' },
+      --   delete = { text = '_' },
+      --   topdelete = { text = '‾' },
+      --   changedelete = { text = '~' },
+      -- },
 
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
-        end
-
-        -- Navigation
-        map({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to next hunk' })
-
-        map({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, desc = 'Jump to previous hunk' })
-
-        -- Actions
-        -- visual mode
-        map('v', '<leader>hs', function()
-          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'stage git hunk' })
-        map('v', '<leader>hr', function()
-          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = 'reset git hunk' })
-        -- normal mode
-        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
-        map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-        map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
-        map('n', '<leader>hb', function()
-          gs.blame_line { full = false }
-        end, { desc = 'git blame line' })
-        map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
-        map('n', '<leader>hD', function()
-          gs.diffthis '~'
-        end, { desc = 'git diff against last commit' })
-
-        -- Toggles
-        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
-        map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
-
-        -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
-      end,
+      -- on_attach = function(bufnr)
+      --   local gs = package.loaded.gitsigns
+      --
+      --   local function map(mode, l, r, opts)
+      --     opts = opts or {}
+      --     opts.buffer = bufnr
+      --     vim.keymap.set(mode, l, r, opts)
+      --   end
+      --
+      --   -- Navigation
+      --   map({ 'n', 'v' }, ']c', function()
+      --     if vim.wo.diff then
+      --       return ']c'
+      --     end
+      --     vim.schedule(function()
+      --       gs.next_hunk()
+      --     end)
+      --     return '<Ignore>'
+      --   end, { expr = true, desc = 'Jump to next hunk' })
+      --
+      --   map({ 'n', 'v' }, '[c', function()
+      --     if vim.wo.diff then
+      --       return '[c'
+      --     end
+      --     vim.schedule(function()
+      --       gs.prev_hunk()
+      --     end)
+      --     return '<Ignore>'
+      --   end, { expr = true, desc = 'Jump to previous hunk' })
+      --
+      --   -- Actions
+      --   -- visual mode
+      --   map('v', '<leader>hs', function()
+      --     gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      --   end, { desc = 'stage git hunk' })
+      --   map('v', '<leader>hr', function()
+      --     gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      --   end, { desc = 'reset git hunk' })
+      --   -- normal mode
+      --   map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
+      --   map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
+      --   map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
+      --   map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+      --   map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
+      --   map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
+      --   map('n', '<leader>hb', function()
+      --     gs.blame_line { full = false }
+      --   end, { desc = 'git blame line' })
+      --   map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
+      --   map('n', '<leader>hD', function()
+      --     gs.diffthis '~'
+      --   end, { desc = 'git diff against last commit' })
+      --
+      --   -- Toggles
+      --   map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
+      --   map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+      --
+      --   -- Text object
+      --   map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
+      -- end,
     },
   },
 
@@ -223,24 +240,181 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
-  -- Fuzzy Finder (files, lsp, etc)
+  
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-      -- Only load if `make` is available. Make sure you have the system
-      -- requirements installed.
+      'nvim-tree/nvim-web-devicons',
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    },
+    keys = {
+      { '<leader>f', function() require('telescope.builtin').find_files() end },
+      { '<leader>F', function() require('telescope.builtin').find_files({ no_ignore = true, prompt_title = 'All Files' }) end },
+      { '<leader>b', function() require('telescope.builtin').buffers() end },
+      { '<leader>g', function() require('telescope').extensions.live_grep_args.live_grep_args() end },
+      { '<leader>h', function() require('telescope.builtin').oldfiles() end },
+      { '<leader>s', function() require('telescope.builtin').lsp_document_symbols() end },
+    },
+    config = function ()
+      local actions = require('telescope.actions')
+
+      require('telescope').setup({
+        defaults = {
+          path_display = { truncate = 1 },
+          prompt_prefix = '   ',
+          selection_caret = '  ',
+          layout_config = {
+            prompt_position = 'top',
+          },
+          preview = {
+            timeout = 200,
+          },
+          sorting_strategy = 'ascending',
+          mappings = {
+            i = {
+              ['<esc>'] = actions.close,
+              ['<C-Down>'] = actions.cycle_history_next,
+              ['<C-Up>'] = actions.cycle_history_prev,
+            },
+          },
+          file_ignore_patterns = { '.git/' },
+        },
+        extensions = {
+          live_grep_args = {
+            mappings = {
+              i = {
+                ["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+                ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
+              },
+            },
+          },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+          buffers = {
+            previewer = false,
+            layout_config = {
+              width = 80,
+            },
+          },
+          oldfiles = {
+            prompt_title = 'History',
+          },
+          lsp_references = {
+            previewer = false,
+          },
+          lsp_definitions = {
+            previewer = false,
+          },
+          lsp_document_symbols = {
+            symbol_width = 55,
+          },
+        },
+      })
+
+      require('telescope').load_extension('fzf')
+    end,
+  },
+
+  -- Fuzzy Finder (files, lsp, etc)
+  -- {
+  --   'nvim-telescope/telescope.nvim',
+  --   -- branch = '0.1.x',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     {
+  --       'nvim-telescope/telescope-fzf-native.nvim',
+  --       build = 'make',
+  --       cond = function()
+  --         return vim.fn.executable 'make' == 1
+  --       end,
+  --     },
+  --   },
+  -- },
+
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    cmd = 'Neotree',
+    keys = {
+      { '<leader>1', ':Neotree reveal toggle<CR>' },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
       {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
+        's1n7ax/nvim-window-picker',
+        opts = {
+          filter_rules = {
+            autoselect_one = true,
+            include_current_win = false,
+            bo = {
+              filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+              buftype = { 'terminal', "quickfix" },
+            },
+          },
+          highlights = {
+            statusline = {
+              focused = {
+                bg = '#9d7cd8',
+              },
+              unfocused = {
+                bg = '#9d7cd8',
+              },
+            },
+          },
+        },
+      },
+    },
+    opts = {
+      close_if_last_window = true,
+      hide_root_node = true,
+      sources = {
+        "filesystem",
+        -- "buffers",
+        "git_status",
+        "document_symbols",
+      },
+      source_selector = {
+        winbar = true,
+        statusline = false,
+        separator = { left = "", right= "" },
+        show_separator_on_edge = true,
+        highlight_tab = "SidebarTabInactive",
+        highlight_tab_active = "SidebarTabActive",
+        highlight_background = "StatusLine",
+        highlight_separator = "SidebarTabInactiveSeparator",
+        highlight_separator_active = "SidebarTabActiveSeparator",
+      },
+      default_component_configs = {
+        indent = {
+          padding = 0,
+        },
+        name = {
+          use_git_status_colors = false,
+          highlight_opened_files = true,
+        },
+      },
+      window = {
+        mappings = {
+          ["<cr>"] = "open_with_window_picker",
+        },
+      },
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_by_name = {
+            ".git",
+          },
+        },
+        -- follow_current_file = {
+        --   enabled = true,
+        -- },
+        group_empty_dirs = false
       },
     },
   },
@@ -254,19 +428,6 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
