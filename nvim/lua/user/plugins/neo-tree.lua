@@ -2,7 +2,7 @@ return {
   'nvim-neo-tree/neo-tree.nvim',
   cmd = 'Neotree',
   keys = {
-    { '<leader>n', ':Neotree reveal toggle<CR>' },
+    { '<leader>1', ':Neotree reveal toggle<CR>' },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -44,7 +44,7 @@ return {
     source_selector = {
       winbar = true,
       statusline = false,
-      separator = { left = "", right= "" },
+      separator = { left = "|", right= "|" },
       show_separator_on_edge = true,
       highlight_tab = "SidebarTabInactive",
       highlight_tab_active = "SidebarTabActive",

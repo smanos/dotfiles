@@ -77,7 +77,7 @@ require("lazy").setup({
   { import = 'user.plugins.lualine' },
 
   -- Display buffers as tabs.
-  { import = 'user.plugins.bufferline' },
+  -- { import = 'user.plugins.bufferline' },
 
   -- Display indentation lines.
   { import = 'user.plugins.indent-blankline' },
@@ -121,11 +121,21 @@ require("lazy").setup({
   -- Show file and LSP context in a bar at the top of the screen.
   { import = 'user.plugins.barbecue' },
 
+  -- Calendar
+  { import = 'user.plugins.calendar' },
+
   -- Virtual scrollbar
   { import = 'user.plugins.nvim-scrollbar' },
 
   -- Highlight occurrences of the word under the cursor.
   { import = 'user.plugins.illuminate' },
+
+  -- Basic text ChatGPT 
+   {'madox2/vim-ai'},
+
+  -- Vim Wiki
+  { import = 'user.plugins.vimwiki' },
+
 }, {
   checker = {
     enabled = true,
