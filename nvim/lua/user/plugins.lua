@@ -79,6 +79,9 @@ require("lazy").setup({
   -- Display buffers as tabs.
   -- { import = 'user.plugins.bufferline' },
 
+  -- Rainbow coloured delimiteres for blankline
+  { import = 'user.plugins.rainbow-delimiters' },
+
   -- Display indentation lines.
   { import = 'user.plugins.indent-blankline' },
 
@@ -90,6 +93,9 @@ require("lazy").setup({
 
   -- Git commands.
   { 'tpope/vim-fugitive', dependencies = 'tpope/vim-rhubarb' },
+
+  -- Vim Blade -- to (hopefully) indent
+  { 'jwalton512/vim-blade' },
 
   --- Floating terminal.
   { import = 'user.plugins.floaterm' },

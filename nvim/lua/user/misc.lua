@@ -7,7 +7,7 @@ vim.cmd([[
 
 -- Define a function to save the file
 function SaveFile()
-  vim.cmd(':w')
+  vim.cmd(':w!')
 end
 
 -- Automatically save the file when exiting insert mode
