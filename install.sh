@@ -28,3 +28,5 @@ ln -sf $DOTFILES/nvm/default-packages $HOME/.nvm/default-packages
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+# Notes

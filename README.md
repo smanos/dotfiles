@@ -2,3 +2,5 @@
 
 Included are
 - nvim
+- others
+
