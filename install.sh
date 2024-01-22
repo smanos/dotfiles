@@ -2,6 +2,9 @@
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Make a bin dir if it doesn't exist
+mkdir -p $HOME/.local/bin
+
 # Zsh
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
 
@@ -28,5 +31,14 @@ ln -sf $DOTFILES/nvm/default-packages $HOME/.nvm/default-packages
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+# Tmux
+rm -rf $HOME/.tmux.conf
+ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+
+# t script
+rm -rf $HOME/.local/bin/t
+ln -sf $DOTFILES/scripts/t $HOME/.local/bin/t
+
 
 # Notes

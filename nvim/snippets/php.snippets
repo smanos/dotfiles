@@ -16,6 +16,19 @@ snippet prif "private method"
 		${0}
 	}
 
+snippet pest "pest test"
+	it('${1}', function() {
+		// Arrange
+		${2}
+
+		// Act 
+		${3}
+
+		// Assert
+		${4}
+
+	});
+
 snippet testt "test method (prefix)"
 	public function test_${1}()
 	{

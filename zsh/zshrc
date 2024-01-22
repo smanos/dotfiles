@@ -8,9 +8,11 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # My Asliases
 alias vim="nvim"
 alias pa="php artisan"
+alias pamfs="php artisan migrate:fresh --seed"
 alias pine="alpine" 
 alias code="cd ~/Herd/pcrm"
 alias dotfiles="cd ~/Documents/dotfiles"
+alias tarot="cd ~/Herd/tarotgame"
 
 # My Path
 path+=($HOME/.local/bin $path)
@@ -21,3 +23,15 @@ export PATH="/Users/smanos/Library/Application Support/Herd/bin/":$PATH
 
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/82/"
+
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/83/"
+
+
+# Auto completion in iTerm
+plugins=(
+zsh-autosuggestions
+git
+)
