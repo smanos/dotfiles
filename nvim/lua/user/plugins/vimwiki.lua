@@ -4,9 +4,9 @@ return {
 
     vim.g.vimwiki_list = {
       {
-        path = '~/Documents/vimwiki',
-        -- syntax = 'markdown',
-        -- ext = '.md',
+        path = os.getenv('VIMWIKIPATH'),
+        syntax = 'markdown',
+        ext = '.md',
       },
     }
     vim.g.vimwiki_folding = "list"

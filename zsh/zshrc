@@ -1,15 +1,48 @@
-export MALAKA="foo bar"
+#################################################
+# Instructions                                  #
+#   1. Update PATH information                  #
+#   2. Update system environment information    #
+#################################################
 
+# ENVIRONMENT
+export MY_ENV="linux" # Options are (linux, macos, work)
 
+# PATH
+if [[ $MY_ENV == "linux" ]]
+then
+    path+=($HOME/.local/bin $path)                              # <-- Update this
+    export VIMWIKIPATH="~/code/vimwiki"
+    alias code="cd ~/code"
+    alias dotfiles="cd ~/code/dotfiles"
+    alias tarot="cd ~/code/tarotgame"
+fi
 
+if [[ $MY_ENV == "macos" ]]
+then
+    path+=/Users/smanos/Documents/Applications/nvim-macos/bin   # <-- Update this
+    export VIMWIKIPATH="~/Documents/vimwiki"
+    alias code="cd ~/Herd/pcrm"
+    alias dotfiles="cd ~/Documents/dotfiles"
+    alias tarot="cd ~/Herd/tarotgame"
 
-PS1="%{%F{033}%}%n%{%f%}@%{%F{green}%}%m:%{%F{yellow}%}%~%{$%f%}%  "
-export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
+    # Homebrew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    # Herd injected PHP binary.
+    export PATH="/Users/smanos/Library/Application Support/Herd/bin/":$PATH
+
+    # Herd injected PHP 8.2 configuration.
+    export HERD_PHP_82_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/82/"
+
+    # Herd injected PHP 8.3 configuration.
+    export HERD_PHP_83_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/83/"
+fi
 
 # Some Random Settings
 ZSH_THEME="cloud"
-# ZSH_THEME="robbyrussell"
+PS1="%{%F{033}%}%n%{%f%}@%{%F{green}%}%m:%{%F{yellow}%}%~%{$%f%}%  "
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # Random Plugins
 ZSH=~/.oh-my-zsh
@@ -20,29 +53,8 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
-
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # My Asliases
 alias vim="nvim"
 alias pa="php artisan"
 alias pamfs="php artisan migrate:fresh --seed"
-alias pine="alpine" 
-alias code="cd ~/Herd/pcrm"
-alias dotfiles="cd ~/Documents/dotfiles"
-alias tarot="cd ~/Herd/tarotgame"
-
-# My Path
-path+=($HOME/.local/bin $path)
-path+=/Users/smanos/Documents/Applications/nvim-macos/bin
-
-# Herd injected PHP binary.
-export PATH="/Users/smanos/Library/Application Support/Herd/bin/":$PATH
-
-# Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/82/"
-
-# Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/83/"
-
+alias pine="alpine"
