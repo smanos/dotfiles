@@ -128,7 +128,7 @@ require("lazy").setup({
   { import = 'user.plugins.barbecue' },
 
   -- Calendar
-  { import = 'user.plugins.calendar' },
+  -- { import = 'user.plugins.calendar' },
 
   -- Virtual scrollbar
   { import = 'user.plugins.nvim-scrollbar' },
