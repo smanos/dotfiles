@@ -6,6 +6,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     items=`find ~/Herd -maxdepth 1 -mindepth 1 -type d`
+    items+=`find ~/Documents -maxdepth 1 -mindepth 1 -type d`
     items+=`echo -e "\n/tmp"`
     selected=`echo "$items" | fzf`
 fi

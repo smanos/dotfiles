@@ -2,6 +2,20 @@ PS1="%{%F{033}%}%n%{%f%}@%{%F{green}%}%m:%{%F{yellow}%}%~%{$%f%}%  "
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
+# Some Random Settings
+ZSH_THEME="cloud"
+# ZSH_THEME="robbyrussell"
+
+# Random Plugins
+ZSH=~/.oh-my-zsh
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+source $ZSH/oh-my-zsh.sh
+
+
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -24,14 +38,6 @@ export PATH="/Users/smanos/Library/Application Support/Herd/bin/":$PATH
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/82/"
 
-
-
 # Herd injected PHP 8.3 configuration.
 export HERD_PHP_83_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/83/"
 
-
-# Auto completion in iTerm
-plugins=(
-zsh-autosuggestions
-git
-)
