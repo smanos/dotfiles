@@ -1,7 +1,7 @@
 [user]
 	email = smanos@gmail.com
 	name = Steve Manos
-	signingkey = 7181D90C57001029
+	signingkey = BB1BC92C97168F2D
 
 [alias]
     a = add
