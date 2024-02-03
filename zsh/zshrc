@@ -10,7 +10,7 @@ export MY_ENV="linux" # Options are (linux, macos, work)
 # PATH
 if [[ $MY_ENV == "linux" ]]
 then
-    path+=($HOME/.local/bin $path)                              # <-- Update this
+    path+=($HOME/.local/bin $HOME/.cargo/bin $path)                              # <-- Update this
     export VIMWIKIPATH="~/code/vimwiki"
     alias code="cd ~/code"
     alias dotfiles="cd ~/code/dotfiles"
