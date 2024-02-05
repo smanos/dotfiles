@@ -15,6 +15,7 @@ then
     alias code="cd ~/code"
     alias dotfiles="cd ~/code/dotfiles"
     alias tarot="cd ~/code/tarotgame"
+    alias sail="./vendor/bin/sail"
 fi
 
 if [[ $MY_ENV == "macos" ]]
