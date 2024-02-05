@@ -21,9 +21,9 @@ then
     rm -rf $HOME/.config/hypr
     ln -s $DOTFILES/hypr $HOME/.config/hypr
 
-    # Hyprland
-    rm -rf $HOME/.config/wpaperd
-    ln -s $DOTFILES/wpaperd $HOME/.config/wpaperd
+    # Waybar
+    rm -rf $HOME/.config/waybar
+    ln -s $DOTFILES/waybar $HOME/.config/waybar
 fi
 
 # Make a bin dir if it doesn't exist
@@ -34,6 +34,7 @@ rm -rf $HOME/.config/kitty
 ln -s $DOTFILES/kitty $HOME/.config/kitty
 
 # Zsh
+rm -rf $HOME/.zshrc
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
 
 # Neovim
