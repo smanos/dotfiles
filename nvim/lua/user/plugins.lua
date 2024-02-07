@@ -142,6 +142,9 @@ require("lazy").setup({
   -- Vim Wiki
   { import = 'user.plugins.vimwiki' },
 
+  -- Obsidian
+  { import = 'user.plugins.obsidian' },
+
 }, {
   checker = {
     enabled = true,
