@@ -15,8 +15,8 @@ ZSH_THEME="cloud"
 ZSH=~/.oh-my-zsh
 plugins=(
     git
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+#    zsh-autosuggestions
+#   zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
