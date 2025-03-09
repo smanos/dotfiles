@@ -1,4 +1,4 @@
 code_transform.class_new.variants:
-  laravel-test: laravel-test
-  shift-task-test: shift-task-test
-  shift-task: shift-task
+laravel-test: laravel-test
+shift-task-test: shift-task-test
+shift-task: shift-task

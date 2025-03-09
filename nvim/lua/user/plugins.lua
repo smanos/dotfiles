@@ -1,156 +1,87 @@
--- Bootstrap Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"--branch=stable",
+		lazyrepo,
+		lazypath,
+	})
+	if vim.v.shell_error ~= 0 then
+		error("Error cloning lazy.nvim:\n" .. out)
+	end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- Color scheme
-  { import = 'user.plugins.tokyonight' },
 
-  -- Commenting support.
-  { import = 'user.plugins.vim-commentary' },
+	{ "christoomey/vim-tmux-navigator" },
+	{ "farmergreg/vim-lastplace" },
+	{ "jessarcher/vim-heritage" },
+	{ "jwalton512/vim-blade" },
+	{ "karb94/neoscroll.nvim", config = true },
+	{ "nelstrom/vim-visual-star-search" },
+	{ "tpope/vim-eunuch" },
+	{ "tpope/vim-fugitive", dependencies = "tpope/vim-rhubarb" },
+	{ "tpope/vim-repeat" },
+	{ "tpope/vim-sleuth" },
+	{ "tpope/vim-surround" },
+	{ "tpope/vim-unimpaired", event = "VeryLazy" },
+	{ "whatyouhide/vim-textobj-xmlattr", dependencies = "kana/vim-textobj-user" },
+	{ "windwp/nvim-autopairs", config = true },
 
-  -- Add, change, and delete surrounding text.
-  { 'tpope/vim-surround' },
-
-  -- Useful commands like :Rename and :SudoWrite.
-  { 'tpope/vim-eunuch' },
-
-  -- Pairs of handy bracket mappings, like [b and ]b.
-  { 'tpope/vim-unimpaired', event = 'VeryLazy' },
-
-  -- Indent autodetection with editorconfig support.
-  { 'tpope/vim-sleuth' },
-
-  -- Allow plugins to enable repeating of commands.
-  { 'tpope/vim-repeat' },
-
-  -- Navigate seamlessly between Vim windows and Tmux panes.
-  { 'christoomey/vim-tmux-navigator' },
-
-  -- Jump to the last location when opening a file.
-  { 'farmergreg/vim-lastplace' },
-
-  -- Enable * searching with visually selected text.
-  { 'nelstrom/vim-visual-star-search' },
-
-  -- Automatically create parent dirs when saving.
-  { 'jessarcher/vim-heritage' },
-
-  -- Text objects for HTML attributes.
-  { 'whatyouhide/vim-textobj-xmlattr', dependencies = 'kana/vim-textobj-user'  },
-
-  -- Automatically set the working directory to the project root.
-  { import = 'user.plugins.vim-rooter' },
-
-  -- Automatically add closing brackets, quotes, etc.
-  { 'windwp/nvim-autopairs', config = true },
-
-  -- Add smooth scrolling to avoid jarring jumps
-  { 'karb94/neoscroll.nvim', config = true },
-
-  -- All closing buffers without closing the split window.
-  { import = 'user.plugins.bufdelete' },
-
-  -- Split arrays and methods onto multiple lines, or join them back up.
-  { import = 'user.plugins.treesj' },
-
-  -- Automatically fix indentation when pasting code.
-  { import = 'user.plugins.vim-pasta' },
-
-  -- Fuzzy finder
-  { import = 'user.plugins.telescope' },
-
-  -- File tree sidebar
-  { import = 'user.plugins.neo-tree' },
-
-  -- A Status line.
-  { import = 'user.plugins.lualine' },
-
-  -- Display buffers as tabs.
-  -- { import = 'user.plugins.bufferline' },
-
-  -- Rainbow coloured delimiteres for blankline
-  { import = 'user.plugins.rainbow-delimiters' },
-
-  -- Display indentation lines.
-  { import = 'user.plugins.indent-blankline' },
-
-  -- Add a dashboard.
-  { import = 'user.plugins.dashboard-nvim' },
-
-  -- Git integration.
-  { import = 'user.plugins.gitsigns' },
-
-  -- Git commands.
-  { 'tpope/vim-fugitive', dependencies = 'tpope/vim-rhubarb' },
-
-  -- Vim Blade -- to (hopefully) indent
-  { 'jwalton512/vim-blade' },
-
-  --- Floating terminal.
-  { import = 'user.plugins.floaterm' },
-
-  -- Improved syntax highlighting
-  { import = 'user.plugins.treesitter' },
-
-  -- Language Server Protocol.
-  { import = 'user.plugins.lspconfig' },
-
-  -- Completion
-  { import = 'user.plugins.cmp' },
-
-  -- PHP Refactoring Tools
-  { import = 'user.plugins.phpactor' },
-
-  -- Project Configuration.
-  { import = 'user.plugins.projectionist' },
-
-  -- Testing helper
-  { import = 'user.plugins.vim-test' },
-
-  -- GitHub Copilot
-  { import = 'user.plugins.copilot' },
-
-  -- Colorize Hex Codes
-  { import = 'user.plugins.colorizer' },
-
-  -- Show file and LSP context in a bar at the top of the screen.
-  { import = 'user.plugins.barbecue' },
-
-  -- Calendar
-  -- { import = 'user.plugins.calendar' },
-
-  -- Virtual scrollbar
-  { import = 'user.plugins.nvim-scrollbar' },
-
-  -- Highlight occurrences of the word under the cursor.
-  { import = 'user.plugins.illuminate' },
-
-  -- Basic text ChatGPT 
-   {'madox2/vim-ai'},
-
-  -- Vim Wiki
-  { import = 'user.plugins.vimwiki' },
-
+	{ import = "user.plugins.barbecue" },
+	{ import = "user.plugins.bufdelete" },
+	-- { import = "user.plugins.bufferline" },
+	{ import = "user.plugins.cmp" },
+	{ import = "user.plugins.colorizer" },
+	{ import = "user.plugins.conform" },
+	{ import = "user.plugins.copilot" },
+	{ import = "user.plugins.dashboard-nvim" },
+	{ import = "user.plugins.floaterm" },
+	{ import = "user.plugins.gitsigns" },
+	{ import = "user.plugins.indent-blankline" },
+	{ import = "user.plugins.illuminate" },
+	{ import = "user.plugins.lazydev" },
+	{ import = "user.plugins.lspconfig" },
+	{ import = "user.plugins.lualine" },
+	{ import = "user.plugins.neo-tree" },
+	{ import = "user.plugins.nvim-scrollbar" },
+	{ import = "user.plugins.phpactor" },
+	{ import = "user.plugins.projectionist" },
+	{ import = "user.plugins.rainbow-delimiters" },
+	{ import = "user.plugins.telescope" },
+	{ import = "user.plugins.todo-comments" },
+	{ import = "user.plugins.treesj" },
+	{ import = "user.plugins.treesitter" },
+	{ import = "user.plugins.tokyonight" },
+	{ import = "user.plugins.vim-commentary" },
+	{ import = "user.plugins.vim-pasta" },
+	{ import = "user.plugins.vim-rooter" },
+	{ import = "user.plugins.vim-test" },
+	{ import = "user.plugins.whichkey" },
 }, {
-  checker = {
-    enabled = true,
-    notify = false,
-  },
-  change_detection = {
-    notify = false,
-  },
-  install = {
-    colorscheme = { "tokyonight", "habamax" },
-  },
+	ui = {
+		-- If you are using a Nerd Font: set icons to an empty table which will use the
+		-- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+		icons = vim.g.have_nerd_font and {} or {
+			cmd = "⌘",
+			config = "🛠",
+			event = "📅",
+			ft = "📂",
+			init = "⚙",
+			keys = "🗝",
+			plugin = "🔌",
+			runtime = "💻",
+			require = "🌙",
+			source = "📄",
+			start = "🚀",
+			task = "📌",
+			lazy = "💤 ",
+		},
+	},
 })

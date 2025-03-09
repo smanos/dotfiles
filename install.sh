@@ -5,6 +5,9 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Make a bin dir if it doesn't exist
 mkdir -p $HOME/.local/bin
 
+# Kitty
+ln -sf $DOTFILES/kitty $HOME/.config/kitty
+
 # Zsh
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
 

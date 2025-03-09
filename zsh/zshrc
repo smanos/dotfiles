@@ -1,9 +1,4 @@
-export MALAKA="foo bar"
-
-
-
-
-PS1="%{%F{033}%}%n%{%f%}@%{%F{green}%}%m:%{%F{yellow}%}%~%{$%f%}%  "
+# PS1="%{%F{033}%}%n%{%f%}@%{%F{green}%}%m:%{%F{yellow}%}%~%{$%f%}%  "
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 
@@ -15,34 +10,32 @@ ZSH_THEME="cloud"
 ZSH=~/.oh-my-zsh
 plugins=(
     git
-#    zsh-autosuggestions
-#   zsh-syntax-highlighting
+    zsh-autosuggestions
+   zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
 
-
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # My Asliases
 alias vim="nvim"
-alias pa="php artisan"
-alias pamfs="php artisan migrate:fresh --seed"
-alias pine="alpine" 
-alias code="cd ~/Herd/pcrm"
-alias dotfiles="cd ~/Documents/dotfiles"
-alias tarot="cd ~/Herd/tarotgame"
+alias code="cd ~/Documents/code"
+alias dotfiles="cd ~/Documents/code/dotfiles"
 
 # My Path
 path+=($HOME/.local/bin $path)
-path+=/Users/smanos/Documents/Applications/nvim-macos/bin
 
-# Herd injected PHP binary.
-export PATH="/Users/smanos/Library/Application Support/Herd/bin/":$PATH
 
-# Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/82/"
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/smanos/Library/Application Support/Herd/config/php/83/"
 
+
+# Display Pokemon-colorscripts
+# Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
+# pokemon-colorscripts --no-title -s -r #without fastfetch
+# pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
+
+# fastfetch. Will be disabled if above colorscript was chosen to install
+# fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
+
+export PATH="/home/manos/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/manos/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
