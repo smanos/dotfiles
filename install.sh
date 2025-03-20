@@ -6,7 +6,7 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p $HOME/.local/bin
 
 # Kitty
-ln -sf $DOTFILES/kitty $HOME/.config/kitty
+ln -s $DOTFILES/kitty $HOME/.config/kitty
 
 # Zsh
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
@@ -36,8 +36,8 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 fi
 
 # Tmux
-rm -rf $HOME/.tmux.conf
-ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
+rm -rf $HOME/.config/tmux
+ln -sf $DOTFILES/tmux $HOME/.config/tmux
 
 # t script
 rm -rf $HOME/.local/bin/t
