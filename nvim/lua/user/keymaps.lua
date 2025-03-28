@@ -62,3 +62,6 @@ vim.keymap.set("n", "<leader>3", ":Calendar -view=day -split=vertical -width=80<
 -- vim.keymap.set('n', '<A-k>', ':move .-2<CR>==')
 -- vim.keymap.set('v', '<A-j>', ":move '>+1<CR>gv=gv")
 -- vim.keymap.set('v', '<A-k>', ":move '<-2<CR>gv=gv")
+
+-- Some I took from Kickstarter
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
