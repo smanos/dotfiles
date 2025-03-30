@@ -39,6 +39,14 @@ fi
 rm -rf $HOME/.config/tmux
 ln -sf $DOTFILES/tmux $HOME/.config/tmux
 
+# Tmux Plugins
+mkdir ~/.tmux # put the tpm in it's own folder, because it will conflict with my tmux dotfiles otherwise
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Tmux Catppuccin
+mkdir -p ~/.tmux/plugins/catppuccin
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.tmux/plugins/catppuccin/tmux
+
 # t script
 rm -rf $HOME/.local/bin/t
 ln -sf $DOTFILES/scripts/t $HOME/.local/bin/t
