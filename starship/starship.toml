@@ -8,7 +8,6 @@ palette = "catppuccin_mocha"
 # Starship modules
 [character]
 # Note the use of Catppuccin color 'peach'
-Macos = " "
 success_symbol = "[[](green) ❯](peach)"
 error_symbol = "[[](red) ❯](peach)"
 vimcmd_symbol = "[ ❮](subtext1)" # For use with zsh-vi-mode
