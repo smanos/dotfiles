@@ -23,19 +23,4 @@ alias dotfiles="cd ~/Documents/code/dotfiles"
 # My Path
 path+=($HOME/.local/bin $path)
 
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-
-
-# Display Pokemon-colorscripts
-# Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
-# pokemon-colorscripts --no-title -s -r #without fastfetch
-# pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
-
-# fastfetch. Will be disabled if above colorscript was chosen to install
-# fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
-
-export PATH="/home/manos/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/home/manos/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+eval "$(starship init zsh)"

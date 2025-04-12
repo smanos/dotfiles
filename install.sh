@@ -10,7 +10,12 @@ rm -rf $HOME/.config/kitty
 ln -s $DOTFILES/kitty $HOME/.config/kitty
 
 # Zsh
+rm -rf $HOME/.zshrc
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
+
+# Starship
+rm -rf $HOME/.config/starship.toml
+ln -sf $DOTFILES/starship/starship.toml $HOME/.config/starship.toml
 
 # Aerospace (Mac)
 rm -rf $HOME/.config/aerospace
