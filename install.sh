@@ -6,10 +6,15 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p $HOME/.local/bin
 
 # Kitty
+rm -rf $HOME/.config/kitty
 ln -s $DOTFILES/kitty $HOME/.config/kitty
 
 # Zsh
 ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
+
+# Aerospace (Mac)
+rm -rf $HOME/.config/aerospace
+ln -s $DOTFILES/aerospace $HOME/.config/aerospace
 
 # Neovim
 rm -rf $HOME/.config/nvim
@@ -40,6 +45,7 @@ rm -rf $HOME/.config/tmux
 ln -sf $DOTFILES/tmux $HOME/.config/tmux
 
 # Tmux Plugins
+rm -rf ~/.tmux
 mkdir ~/.tmux # put the tpm in it's own folder, because it will conflict with my tmux dotfiles otherwise
 mkdir ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
