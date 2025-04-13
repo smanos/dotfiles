@@ -2,8 +2,9 @@
 
 Included are
 1. kitty
-2. git
-3. nvim
-4. tmux
-5. zsh
-6. others (nvm/phpactor)
+2. wezterm
+3. git
+4. nvim
+5. tmux
+6. zsh
+7. others (nvm/phpactor)

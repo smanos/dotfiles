@@ -43,3 +43,10 @@ vim.opt.foldlevel = 20
 vim.opt.inccommand = "split"
 vim.opt.timeoutlen = 300
 vim.opt.cursorline = true
+
+vim.cmd([[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]])
